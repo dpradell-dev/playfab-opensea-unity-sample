@@ -1,13 +1,14 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions";
-import Openfort from "@openfort/openfort-node";
+import Openfort, { CreateWeb3ConnectionRequest } from "@openfort/openfort-node";
 
 const openfort = new Openfort(process.env.OF_API_KEY);
+const CHAIN_ID = 80001;
 
 function isValidRequestBody(body: any): boolean {
-  return body?.CallerEntityProfile?.Lineage?.MasterPlayerAccountId &&
-         body?.FunctionArgument?.playerId &&
-         body?.FunctionArgument?.chainId &&
-         body?.FunctionArgument?.uri;
+  return typeof body?.FunctionArgument?.playerId === 'string' &&
+         typeof body?.FunctionArgument?.chainId === 'number' &&
+         typeof body?.FunctionArgument?.uri === 'string' &&
+         body?.CallerEntityProfile?.Lineage?.MasterPlayerAccountId;
 }
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
@@ -23,14 +24,25 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     const { playerId, chainId, uri } = req.body.FunctionArgument;
 
     context.log(playerId);
+    context.log(chainId);
+    context.log(uri);
 
-    const response = await openfort.web3Connections.create({ player: playerId, chainId, uri });
+    const connectionRequest: CreateWeb3ConnectionRequest = {
+      player: playerId,
+      chainId: CHAIN_ID,
+      uri: uri
+  };
+
+    const response = await openfort.web3Connections.create(connectionRequest);
+
+    context.log("RESPONSE PLAYER: " + response.player);
 
     if (!response) {
       context.res = { status: 204, body: "No content received from Openfort API." };
       return;
     }
 
+    context.log(response);
     context.res = { status: 200, body: response.id };
     context.log("API call was successful and response sent.");
   } catch (error) {

@@ -26,7 +26,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
       return;
     }
 
-    context.res = { status: 200, body: response };
+    context.res = { status: 200, body: JSON.stringify(response) };
     context.log("API call was successful and response sent.");
   } catch (error) {
     context.log("Unhandled error occurred:", error);

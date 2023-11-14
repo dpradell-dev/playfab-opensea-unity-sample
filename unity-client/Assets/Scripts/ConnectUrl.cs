@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Openfort.Model;
 using PlayFab;
@@ -10,6 +11,8 @@ public class ConnectUrl : MonoBehaviour
 {
     public TMP_InputField urlInput;
     public TextMeshProUGUI statusText;
+
+    private string _connectionId;
 
     public void OnConnectBtnClickHandler()
     {
@@ -57,8 +60,23 @@ public class ConnectUrl : MonoBehaviour
 
     private void OnGetWeb3ActionSuccess(ExecuteFunctionResult result)
     {
-        Debug.Log(result.FunctionResult.ToString());
+        var response = result.FunctionResult.ToString();
+        Debug.Log(response);
+        
+        Web3ActionListResponse listResponses = JsonConvert.DeserializeObject<Web3ActionListResponse>(response);
+        
+        if (listResponses.Data.Count == 0)
+        {
+            GetWeb3Action(_connectionId);
+            return;
+        }
+
+        foreach (var web3Action in listResponses.Data)
+        {
+            Debug.Log(web3Action.Id);
+        }
     }
+
 
     private void OnCreateWeb3ConnectionError(PlayFabError error)
     {
@@ -68,8 +86,8 @@ public class ConnectUrl : MonoBehaviour
     private void OnCreateWeb3ConnectionSuccess(ExecuteFunctionResult result)
     {
         Debug.Log(result.FunctionResult.ToString());
-        var connectionId = result.FunctionResult.ToString();
-        
-        GetWeb3Action(connectionId);
+        _connectionId = result.FunctionResult.ToString();
+
+        GetWeb3Action(_connectionId);
     }
 }
