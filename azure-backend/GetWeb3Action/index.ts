@@ -5,9 +5,7 @@ const openfort = new Openfort(process.env.OF_API_KEY);
 
 function isValidRequestBody(body: any): boolean {
   return body?.CallerEntityProfile?.Lineage?.MasterPlayerAccountId &&
-         body?.FunctionArgument?.playerId &&
-         body?.FunctionArgument?.chainId &&
-         body?.FunctionArgument?.uri;
+         body?.FunctionArgument?.connectionId
 }
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
@@ -20,18 +18,15 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
       return;
     }
 
-    const { playerId, chainId, uri } = req.body.FunctionArgument;
-
-    context.log(playerId);
-
-    const response = await openfort.web3Connections.create({ player: playerId, chainId, uri });
+    const connectionId = req.body.FunctionArgument.connectionId;
+    const response = await openfort.web3Connections.getWeb3Actions({ id: connectionId });
 
     if (!response) {
       context.res = { status: 204, body: "No content received from Openfort API." };
       return;
     }
 
-    context.res = { status: 200, body: response.id };
+    context.res = { status: 200, body: response };
     context.log("API call was successful and response sent.");
   } catch (error) {
     context.log("Unhandled error occurred:", error);

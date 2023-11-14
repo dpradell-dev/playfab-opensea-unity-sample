@@ -1,3 +1,5 @@
+using System;
+using Newtonsoft.Json;
 using Openfort.Model;
 using PlayFab;
 using PlayFab.CloudScriptModels;
@@ -29,16 +31,45 @@ public class ConnectUrl : MonoBehaviour
             }
         };
 
-        PlayFabCloudScriptAPI.ExecuteFunction(request, ResultCallback, ErrorCallback);
+        PlayFabCloudScriptAPI.ExecuteFunction(request, OnCreateWeb3ConnectionSuccess, OnCreateWeb3ConnectionError);
+    }
+    
+    private void GetWeb3Action(string connectionId)
+    {
+        statusText.text = "Getting Web3 Action...";
+
+        var request = new ExecuteFunctionRequest
+        {
+            FunctionName = "GetWeb3Action",
+            FunctionParameter = new
+            {
+                connectionId
+            }
+        };
+
+        PlayFabCloudScriptAPI.ExecuteFunction(request, OnGetWeb3ActionSuccess, OnGetWeb3ActionError);
     }
 
-    private void ErrorCallback(PlayFabError error)
+    private void OnGetWeb3ActionError(PlayFabError error)
     {
         throw new System.NotImplementedException();
     }
 
-    private void ResultCallback(ExecuteFunctionResult result)
+    private void OnGetWeb3ActionSuccess(ExecuteFunctionResult result)
     {
-        Debug.Log(result.FunctionResult);
+        Debug.Log(result.FunctionResult.ToString());
+    }
+
+    private void OnCreateWeb3ConnectionError(PlayFabError error)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void OnCreateWeb3ConnectionSuccess(ExecuteFunctionResult result)
+    {
+        Debug.Log(result.FunctionResult.ToString());
+        var connectionId = result.FunctionResult.ToString();
+        
+        GetWeb3Action(connectionId);
     }
 }
