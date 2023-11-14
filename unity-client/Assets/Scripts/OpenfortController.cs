@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using EntityKey = PlayFab.CloudScriptModels.EntityKey;
 
-public class OpenfortController : MonoBehaviour
+public class OpenfortController : Singleton<OpenfortController>
 {
     [System.Serializable]
     public class CreatePlayerResponse
@@ -57,6 +57,20 @@ public class OpenfortController : MonoBehaviour
     private string _playerId;
     private string _playerWalletAddress;
 
+    #region PUBLIC_METHODS
+
+    private void SetPlayerId(string playerId)
+    {
+        _playerId = _playerId;
+    }
+
+    public string GetPlayerId()
+    {
+        return _playerId;
+    }
+    
+    #endregion
+
     #region AZURE_FUNCTION_CALLERS
 
     public void PlayFabAuth_OnLoginSuccess_Handler()
@@ -68,7 +82,7 @@ public class OpenfortController : MonoBehaviour
             if (result.Data != null && result.Data.ContainsKey("OpenfortPlayerId") &&
                 result.Data.ContainsKey("PlayerWalletAddress"))
             {
-                _playerId = result.Data["OpenfortPlayerId"].Value;
+                SetPlayerId(result.Data["OpenfortPlayerId"].Value);
                 _playerWalletAddress = result.Data["PlayerWalletAddress"].Value;
                 GetPlayerNftInventory(_playerId);
             }
@@ -193,7 +207,7 @@ public class OpenfortController : MonoBehaviour
         CreatePlayerResponse response = JsonUtility.FromJson<CreatePlayerResponse>(json);
 
         Debug.Log($"Player ID: {response.playerId}, Player Wallet Address: {response.playerWalletAddress}");
-        _playerId = response.playerId;
+        SetPlayerId(response.playerId);
         _playerWalletAddress = response.playerWalletAddress;
 
         mintPanel.SetActive(true);
