@@ -1,3 +1,4 @@
+using Openfort.Model;
 using PlayFab;
 using PlayFab.CloudScriptModels;
 using TMPro;
@@ -31,13 +32,13 @@ public class ConnectUrl : MonoBehaviour
         PlayFabCloudScriptAPI.ExecuteFunction(request, ResultCallback, ErrorCallback);
     }
 
-    private void ErrorCallback(PlayFabError obj)
+    private void ErrorCallback(PlayFabError error)
     {
         throw new System.NotImplementedException();
     }
 
-    private void ResultCallback(ExecuteFunctionResult obj)
+    private void ResultCallback(ExecuteFunctionResult result)
     {
-        Debug.Log(obj.FunctionResult);
+        Debug.Log(result.FunctionResult);
     }
 }

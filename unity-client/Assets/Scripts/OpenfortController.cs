@@ -61,7 +61,7 @@ public class OpenfortController : Singleton<OpenfortController>
 
     private void SetPlayerId(string playerId)
     {
-        _playerId = _playerId;
+        _playerId = playerId;
     }
 
     public string GetPlayerId()
@@ -250,16 +250,22 @@ public class OpenfortController : Singleton<OpenfortController>
     private void OnGetPlayerNftInventorySuccess(ExecuteFunctionResult result)
     {
         statusText.text = "NFT inventory retrieved!";
-        Debug.Log(result.FunctionResult);
+        
         var json = result.FunctionResult.ToString();
         List<NftItem> nftItems = JsonConvert.DeserializeObject<List<NftItem>>(json);
 
+        if (nftItems.Count == 0)
+        {
+            mintPanel.SetActive(true);
+            return;
+        }
+        
+        nftsPanel.SetActive(true);
+        
         foreach (var nft in nftItems)
         {
-            //TODO instantiate into scroll grid layout in case more than 1 nft.
             var instantiatedNft = Instantiate(nftPrefab, nftsPanel.transform);
             instantiatedNft.Setup(nft.assetType, nft.tokenId.ToString());
-            nftsPanel.SetActive(true);
             Debug.Log(nft);
         }
     }
