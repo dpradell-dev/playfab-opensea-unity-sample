@@ -7,13 +7,6 @@
       "dependencies": {},
       "hash": "b992a061fbf68ff1eb475d0837065b0549ed31ba"
     },
-    "com.openfort.sdk": {
-      "version": "https://github.com/openfort-xyz/openfort-csharp-unity.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "2fe25336869e993decca3400354d35d5450ff2c3"
-    },
     "com.unity.2d.animation": {
       "version": "9.0.3",
       "depth": 1,
