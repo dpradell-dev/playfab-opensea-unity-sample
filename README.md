@@ -173,8 +173,6 @@ You'll notice that a `mint` transaction has been successfully processed:
 
 Additionally, by choosing your **Sepolia Account** and viewing ***NFT Transfers***, the transaction is further confirmed:
 
-<img src="docs-img/image-36.png" width="500">
-
 ![Alt text](image-4.png)
 
 ## Conclusion
