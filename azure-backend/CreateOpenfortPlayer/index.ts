@@ -32,27 +32,19 @@ const httpTrigger: AzureFunction = async function (
         validateRequestBody(req);
         const masterPlayerAccountId = req.body.CallerEntityProfile.Lineage.MasterPlayerAccountId;
 
-        // Check if Openfort data already exists
-        const { OFplayerId, OFaccountAddress } = await checkExistingOpenfortData(masterPlayerAccountId);
+        context.log("Creating player in Openfort...");
+        const OFplayer = await createOpenfortPlayer(masterPlayerAccountId);
 
-        if (OFplayerId && OFaccountAddress) {
-            context.log("Openfort Player ID and Wallet Address already exist in PlayFab UserReadOnlyData.");
-            context.res = buildSuccessResponse(OFplayerId, OFaccountAddress);
-        } else {
-            context.log("Creating player in Openfort...");
-            const OFplayer = await createOpenfortPlayer(masterPlayerAccountId);
+        context.log(`Player with ID ${OFplayer.id} created. Proceeding to create account in Openfort...`);
+        const OFaccount = await createOpenfortAccount(OFplayer.id);
 
-            context.log(`Player with ID ${OFplayer.id} created. Proceeding to create account in Openfort...`);
-            const OFaccount = await createOpenfortAccount(OFplayer.id);
+        context.log(`Account with address ${OFaccount.address} created.`);
 
-            context.log(`Account with address ${OFaccount.address} created.`);
+        // Adding data to PlayFab UserReadOnlyData
+        await addDataToPlayFab(masterPlayerAccountId, OFplayer.id, OFaccount.address);
 
-            // Adding data to PlayFab UserReadOnlyData
-            await addDataToPlayFab(masterPlayerAccountId, OFplayer.id, OFaccount.address);
-
-            context.res = buildSuccessResponse(OFplayer.id, OFaccount.address);
-            context.log("Function execution successful and response sent.");
-        }
+        context.res = buildSuccessResponse(OFplayer.id, OFaccount.address);
+        context.log("Function execution successful and response sent.");
     } catch (error) {
         context.log("An error occurred:", error);
         context.res = {
@@ -61,24 +53,6 @@ const httpTrigger: AzureFunction = async function (
         };
     }
 };
-
-async function checkExistingOpenfortData(masterPlayerAccountId: string): Promise<{ OFplayerId?: string, OFaccountAddress?: string }> {
-    return new Promise((resolve, reject) => {
-        PlayFabServer.GetUserReadOnlyData({
-            PlayFabId: masterPlayerAccountId,
-            Keys: ["OpenfortPlayerId", "PlayerWalletAddress"]
-        }, (error, result) => {
-            if (error) {
-                reject(new Error(`Failed to retrieve UserReadOnlyData: ${error.errorMessage}`));
-            } else {
-                const data = result.data.Data;
-                const OFplayerId = data.OpenfortPlayerId?.Value;
-                const OFaccountAddress = data.PlayerWalletAddress?.Value;
-                resolve({ OFplayerId, OFaccountAddress });
-            }
-        });
-    });
-}
 
 async function createOpenfortPlayer(masterPlayerAccountId: string) {
     const OFplayer = await openfort.players.create({ name: masterPlayerAccountId });

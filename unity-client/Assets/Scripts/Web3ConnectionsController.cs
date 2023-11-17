@@ -35,7 +35,7 @@ public class Web3ConnectionsController : MonoBehaviour
     public void OnApproveSellBtnClickHandler()
     {
         approvePanel.SetActive(false);
-        GetWeb3Action(_connectionId);
+        GetWeb3Actions(_connectionId);
     }
 
     #region AZURE_FUNCTION_CALLS
@@ -58,13 +58,13 @@ public class Web3ConnectionsController : MonoBehaviour
         PlayFabCloudScriptAPI.ExecuteFunction(request, OnCreateWeb3ConnectionSuccess, OnCreateWeb3ConnectionError);
     }
     
-    private void GetWeb3Action(string connectionId)
+    private void GetWeb3Actions(string connectionId)
     {
         statusText.text = "Getting Web3 Action...";
 
         var request = new ExecuteFunctionRequest
         {
-            FunctionName = "GetWeb3Action",
+            FunctionName = "GetWeb3Actions",
             FunctionParameter = new
             {
                 connectionId
@@ -99,7 +99,7 @@ public class Web3ConnectionsController : MonoBehaviour
         Debug.Log(result.FunctionResult.ToString());
         _connectionId = result.FunctionResult.ToString();
 
-        GetWeb3Action(_connectionId);
+        GetWeb3Actions(_connectionId);
     }
     
     private void OnGetWeb3ActionSuccess(ExecuteFunctionResult result)
@@ -123,7 +123,7 @@ public class Web3ConnectionsController : MonoBehaviour
         // If there are no pending actions, call GetWeb3Action
         if (!hasPendingActions)
         {
-            GetWeb3Action(_connectionId);
+            GetWeb3Actions(_connectionId);
         }
     }
     
@@ -134,9 +134,6 @@ public class Web3ConnectionsController : MonoBehaviour
         
         //TODO Add open panel with button to refresh actions and see if something's pending
         approvePanel.SetActive(true);
-        // if something's pending let's approve it!
-        
-        // Then message to see marketplace
     }
     #endregion
     
@@ -155,7 +152,7 @@ public class Web3ConnectionsController : MonoBehaviour
     
     private void OnSubmitWeb3ActionError(PlayFabError error)
     {
-        createPanel.SetActive(true);
+        approvePanel.SetActive(true);
         Debug.Log(error.ErrorMessage);
     }
     #endregion

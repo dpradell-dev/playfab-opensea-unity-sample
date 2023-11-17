@@ -161,7 +161,7 @@ Play ***Login*** scene, opt for ***Register***, provide an email and password, t
 
 Select ***Mint***. After a brief period, you should see a representation of your newly minted NFT:
 
-![Minted NFT](playfab-opensea-img-33.png)
+![Alt text](image.png)
 
 In the [Openfort Players dashboard](https://dashboard.openfort.xyz/players), a new player entry should be visible. On selecting this player:
 
@@ -175,6 +175,38 @@ Additionally, by choosing your **Sepolia Account** and viewing ***NFT Transfers*
 
 ![Alt text](playfab-opensea-img-4.png)
 
+In Unity, click on ***List NFTs*** and the ***Web3 Connection*** panel will appear:
+
+![Alt text](image-1.png)
+
+Go to [OpenSea](https://testnets.opensea.io/) and choose ***Login***:
+
+![Alt text](image-2.png)
+
+Then select ***WalletConnect*** and click on the icon to copy the connection URL:
+
+![Alt text](image-3.png)
+
+Back to Unity, paste the URL and choose ***Create***:
+
+![Alt text](image-4.png)
+
+//TODO Accept and sign part
+
+In OpenSea go to your profile and you will find your NFT. Choose ***List for sale***:
+
+![Alt text](image-5.png)
+
+Set a price and a duration and choose ***Complete listing***:
+
+![Alt text](image-6.png)
+
+Back in Unity, select ***Approve***:
+
+![Alt text](image-7.png)
+
+//TODO check why it's not working (out of gas)
+
 ## Conclusion
 
 Upon completing the above steps, your Unity game will be fully integrated with Openfort and PlayFab. Always remember to test every feature before deploying to guarantee a flawless player experience.
@@ -184,7 +216,7 @@ For a deeper understanding of the underlying processes, check out the [tutorial 
 ## Get support
 If you found a bug or want to suggest a new [feature/use case/sample], please [file an issue](../../issues).
 
-If you have questions, comments, or need help with code, we're here to help:
+If you have questions, or comments, or need help with code, we're here to help:
 - on Twitter at https://twitter.com/openfortxyz
 - on Discord: https://discord.com/invite/t7x7hwkJF4
 - by email: support+youtube@openfort.xyz

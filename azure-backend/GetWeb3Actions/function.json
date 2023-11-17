@@ -13,5 +13,5 @@
       "name": "res"
     }
   ],
-  "scriptFile": "../dist/GetWeb3Action/index.js"
+  "scriptFile": "../dist/GetWeb3Actions/index.js"
 }
