@@ -169,13 +169,13 @@ In the [Openfort Players dashboard](https://dashboard.openfort.xyz/players), a n
 
 You'll notice that a `mint` transaction has been successfully processed:
 
-![Mint Transaction](docs-img/image-35.png)
+![Alt text](image-3.png)
 
-Additionally, by choosing your **Mumbai Account** and viewing ***ERC-721 Token Txns***, the transaction is further confirmed:
+Additionally, by choosing your **Sepolia Account** and viewing ***NFT Transfers***, the transaction is further confirmed:
 
 <img src="docs-img/image-36.png" width="500">
 
-![Transaction Confirm 2](docs-img/image-37.png)
+![Alt text](image-4.png)
 
 ## Conclusion
 
