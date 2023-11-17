@@ -41,7 +41,7 @@ By integrating the [Openfort SDK](https://github.com/openfort-xyz/openfort-node)
 ## Deploy Azure Backend
 Open [azure-backend](https://github.com/openfort-xyz/playfab-unity-sample/tree/main/azure-backend) with VS Code and sign in to Azure:
 
-![Azure backend image](playfab-opensea-img-4.png)
+![Alt text](playfab-opensea-img-39.png)
 
 Ensure your Function App (here, it's "openfort-playfab") is listed:
 
@@ -54,7 +54,7 @@ npm install
 
 In the explorer, right-click on a function and select ***Deploy to Function App***:
 
-![Alt text](playfab-opensea-img-39.png)
+![Alt text](playfab-opensea-img-6.png)
 
 Next, choose your Function App:
 
