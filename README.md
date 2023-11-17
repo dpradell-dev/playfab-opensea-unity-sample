@@ -41,11 +41,11 @@ By integrating the [Openfort SDK](https://github.com/openfort-xyz/openfort-node)
 ## Deploy Azure Backend
 Open [azure-backend](https://github.com/openfort-xyz/playfab-unity-sample/tree/main/azure-backend) with VS Code and sign in to Azure:
 
-<img src="playfab-opensea-img-39.png" width="500">
+![Alt text](playfab-opensea-img-39.png)
 
 Ensure your Function App (here, it's "openfort-playfab") is listed:
 
-<img src="playfab-opensea-img-38.png" width="500">
+![Alt text](playfab-opensea-img-38.png)
 
 In the terminal, run:
 ```
