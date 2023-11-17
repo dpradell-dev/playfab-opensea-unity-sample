@@ -54,7 +54,7 @@ npm install
 
 In the explorer, right-click on a function and select ***Deploy to Function App***:
 
-<img src="docs-img/image-6.png" width="500">
+<img src="image-6.png" width="500">
 
 Next, choose your Function App:
 
