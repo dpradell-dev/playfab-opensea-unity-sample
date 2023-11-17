@@ -66,7 +66,7 @@ Then, click on ***Deploy***:
 
 Navigate to your [Azure Portal](https://portal.azure.com/#home) and open your Function App. You should see all the functions listed:
 
-![Functions List](docs-img/image-10.png)
+![Alt text](image-7.png)
 
 Click on any function and select ***Get Function Url***:
 
