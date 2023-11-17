@@ -3,9 +3,9 @@
 ## Overview
 [PlayFab](https://playfab.com/) is a backend service provided by Microsoft for game developers, offering tools for live game management, all powered by Azure's cloud infrastructure.
 
-In this integration, we use the [Google Play Games plugin for Unity](https://github.com/playgameservices/play-games-plugin-for-unity) to handle authentication with PlayFab, ensuring a seamless and secure login experience for users on Android devices.
-
 By integrating the [Openfort SDK](https://github.com/openfort-xyz/openfort-node) into Azure Functions, we establish a seamless connection to PlayFab. Unity clients using the PlayFab Unity SDK can tap into these functions, accessing the full range of Openfort features within the game environment.
+
+In this sample we especially dig into [Web3 Connections API features](https://www.openfort.xyz/docs/reference/api/create-a-web3-connection-object), being able to connect with an NFT marketplace (like OpenSea) and list your NFTs from the game frictionlessly.
 
 ## Application Workflow
 
@@ -177,7 +177,7 @@ Additionally, by choosing your **Sepolia Account** and viewing ***NFT Transfers*
 
 In Unity, click on ***List NFTs*** and the ***Web3 Connection*** panel will appear:
 
-![Alt text](image-1.png)
+![Alt text](image-1.png) //TODO correct image
 
 Go to [OpenSea](https://testnets.opensea.io/) and choose ***Login***:
 
