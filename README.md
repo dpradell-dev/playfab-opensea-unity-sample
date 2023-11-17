@@ -27,25 +27,25 @@ By integrating the [Openfort SDK](https://github.com/openfort-xyz/openfort-node)
 1. #### [Add a Contract](https://dashboard.openfort.xyz/assets/new)
    This sample requires a contract to run. We use [0x51216BFCf37A1D2002A9F3290fe5037C744a6438](https://sepolia.etherscan.io/address/0x51216bfcf37a1d2002a9f3290fe5037c744a6438) (NFT contract deployed in 11155111 Sepolia). You can use this for the guide:
 
-   ![Alt text](image.png)
+   ![Alt text](playfab-opensea-img.png)
 
 2. #### [Add a Policy](https://dashboard.openfort.xyz/policies/new)
    We aim to cover gas fees for users. Set a new gas policy:
 
-   ![Alt text](image-1.png)
+   ![Alt text](playfab-opensea-img-1.png)
 
    Now, add a rule so our contract uses this policy:
 
-   ![Alt text](image-2.png)
+   ![Alt text](playfab-opensea-img-2.png)
 
 ## Deploy Azure Backend
 Open [azure-backend](https://github.com/openfort-xyz/playfab-unity-sample/tree/main/azure-backend) with VS Code and sign in to Azure:
 
-![Azure backend image](image-4.png)
+![Azure backend image](playfab-opensea-img-4.png)
 
 Ensure your Function App (here, it's "openfort-playfab") is listed:
 
-![Function App image](image-5.png)
+![Alt text](playfab-opensea-img-38.png)
 
 In the terminal, run:
 ```
@@ -54,23 +54,23 @@ npm install
 
 In the explorer, right-click on a function and select ***Deploy to Function App***:
 
-<img src="image-6.png" width="500">
+![Alt text](playfab-opensea-img-39.png)
 
 Next, choose your Function App:
 
-![Select Function App](image-7.png)
+![Select Function App](playfab-opensea-img-7.png)
 
 Then, click on ***Deploy***:
 
-![Deploy Confirmation](image-8.png)
+![Deploy Confirmation](playfab-opensea-img-8.png)
 
 Navigate to your [Azure Portal](https://portal.azure.com/#home) and open your Function App. You should see all the functions listed:
 
-![Alt text](image-10.png)
+![Alt text](playfab-opensea-img-10.png)
 
 Click on any function and select ***Get Function Url***:
 
-![Get Function URL](image-11.png)
+![Get Function URL](playfab-opensea-img-11.png)
 
 Subsequently, add this URL (along with all others) to PlayFab to enable access to our Azure Functions from within PlayFab.
 
@@ -79,11 +79,11 @@ Subsequently, add this URL (along with all others) to PlayFab to enable access t
 1. #### Register Azure Functions
     Visit the [PlayFab developer dashboard](https://developer.playfab.com/), choose your title, and click on ***Automation***:
 
-    ![Alt text](image-5.png)
+    ![Alt text](playfab-opensea-img-5.png)
 
     Our functions are already registered. To do the same, click ***Register function*** and provide the function name along with its URL:
 
-    <img src="image-13.png" width="500">
+    <img src="playfab-opensea-img-13.png" width="500">
 
     Repeat this for all deployed functions.
 
@@ -95,7 +95,7 @@ Our Azure backend requires environment variables from both PlayFab and Openfort.
     - Navigate to the [Azure Portal](https://portal.azure.com/#home) and select your Function App.
     - Under ***Configuration***, click ***New application setting***:
       
-      <img src="image-21.png" width="500">
+      <img src="playfab-opensea-img-21.png" width="500">
 
     - Provide the following details:
       + Name: `OF_API_KEY`
@@ -111,20 +111,20 @@ Our Azure backend requires environment variables from both PlayFab and Openfort.
 
     After adding these, your configuration panel should resemble the following. Click ***Save***:
     
-    <img src="image-23.png" width="500">
+    <img src="playfab-opensea-img-23.png" width="500">
 
 2. #### Add PlayFab Environment Variables
     - Visit the [PlayFab developer dashboard](https://developer.playfab.com/), select your title, and navigate to ***Settings wheel --> Title settings***:
 
-      <img src="image-24.png" width="500">
+      <img src="playfab-opensea-img-24.png" width="500">
 
     - In the ***API Features*** section, copy your ***Title ID***:
 
-      <img src="image-29.png" width="500">
+      <img src="playfab-opensea-img-29.png" width="500">
 
     - Under ***Secret Keys***, note down your ***Secret key***:
 
-      ![Secret Key](image-26.png)
+      ![Secret Key](playfab-opensea-img-26.png)
 
     - Return to the [Azure Portal](https://portal.azure.com/#home) and choose your Function App.
     - Under ***Configuration***, select ***New application setting*** and input:
@@ -137,7 +137,7 @@ Our Azure backend requires environment variables from both PlayFab and Openfort.
 
     Your configuration panel should now look like the following. Confirm your changes by clicking ***Save***:
 
-    <img src="image-27.png" width="500">
+    <img src="playfab-opensea-img-27.png" width="500">
 
 ## Set up Unity Client
 
@@ -151,29 +151,29 @@ To begin, open [unity-client](https://github.com/openfort-xyz/playfab-unity-samp
     - Navigate to the ***Project*** tab.
     - Search for `PlayFabSharedSettings` and input your PlayFab ***Title ID***:
 
-      <img src="image-28.png" width="500">
+      <img src="playfab-opensea-img-28.png" width="500">
 
 ## Test in Editor
 
 Play ***Login*** scene, opt for ***Register***, provide an email and password, then click ***Register*** again. This scene should appear:
 
-![Game Scene](image-32.png)
+![Game Scene](playfab-opensea-img-32.png)
 
 Select ***Mint***. After a brief period, you should see a representation of your newly minted NFT:
 
-![Minted NFT](image-33.png)
+![Minted NFT](playfab-opensea-img-33.png)
 
 In the [Openfort Players dashboard](https://dashboard.openfort.xyz/players), a new player entry should be visible. On selecting this player:
 
-![Player Entry](image-34.png)
+![Player Entry](playfab-opensea-img-34.png)
 
 You'll notice that a `mint` transaction has been successfully processed:
 
-![Alt text](image-3.png)
+![Alt text](playfab-opensea-img-3.png)
 
 Additionally, by choosing your **Sepolia Account** and viewing ***NFT Transfers***, the transaction is further confirmed:
 
-![Alt text](image-4.png)
+![Alt text](playfab-opensea-img-4.png)
 
 ## Conclusion
 
