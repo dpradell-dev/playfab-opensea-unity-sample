@@ -87,34 +87,6 @@ Subsequently, add this URL (along with all others) to PlayFab to enable access t
 
     Repeat this for all deployed functions.
 
-2. #### Install Google Add-on
-    Navigate to ***Add-ons*** and choose ***Google***:
-
-    ![Google Add-on Selection](docs-img/image-15.png)
-
-    Then, visit the [Google Cloud APIs Credentials dashboard](https://console.cloud.google.com/apis/credentials) and click on the arrow icon next to your ***OAuth Web Application Client***:
-
-    ![OAuth Web Application Client](docs-img/image-16.png)
-
-    Copy both the ***Client ID*** and ***Client Secret***:
-
-    <img src="docs-img/image-17.png" width="500">
-
-    Return to the PlayFab dashboard, paste these details into the ***Google OAuth Client ID*** and ***Google OAuth Client Secret*** fields, and click ***Install Google***:
-
-    <img src="docs-img/image-18.png" width="500">
-
-3. #### Add PlayFab OAuth Redirect URL
-    For this, go to the [Google Cloud APIs Credentials dashboard](https://console.cloud.google.com/apis/credentials). Here, select your *Web application*:
-
-    ![Web Application Selection](docs-img/image-19.png)
-
-    In the ***Authorized redirect URIs*** section, add the URL below and click ***Save***:
-    ```
-    https://oauth.playfab.com/oauth2/google
-    ```
-    <img src="docs-img/image-20.png" width="500">
-
 ## Set up Azure Backend
 
 Our Azure backend requires environment variables from both PlayFab and Openfort. Let's configure them.
