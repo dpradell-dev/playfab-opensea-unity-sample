@@ -256,7 +256,7 @@ public class OpenfortController : Singleton<OpenfortController>
 
         if (nftItems.Count == 0)
         {
-            mintPanel.SetActive(true);
+            GetPlayerNftInventory(_playerId);
             return;
         }
         

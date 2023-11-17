@@ -1,5 +1,5 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions";
-import Openfort from "@openfort/openfort-node";
+import Openfort, { GetTransactionIntentRequest } from "@openfort/openfort-node";
 
 const openfort = new Openfort(process.env.OF_API_KEY);
 
@@ -31,8 +31,12 @@ const httpTrigger: AzureFunction = async function (
     const transactionIntentId = req.body.FunctionArgument.transactionIntentId;
     context.log(`Fetching transactionIntent for ID: ${transactionIntentId}`);
 
-    const transactionIntent = await openfort.transactionIntents
-      .get({ id: transactionIntentId })
+    const txIntentRequest: GetTransactionIntentRequest = {
+      id: transactionIntentId,
+      expand: ["player"]
+    };
+
+    const transactionIntent = await openfort.transactionIntents.get(txIntentRequest)
       .catch((error) => {
         context.log("Error while fetching transactionIntent:", error);
         context.res = {

@@ -1,11 +1,11 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions";
-import Openfort from "@openfort/openfort-node";
+import Openfort, { PlayerCreateRequest } from "@openfort/openfort-node";
 import { PlayFabServer } from "playfab-sdk"; // Import PlayFab Server SDK
 
 const OF_API_KEY = process.env.OF_API_KEY;
 const PLAYFAB_SECRET_KEY = process.env.PLAYFAB_SECRET_KEY;
 const PLAYFAB_TITLE_ID = process.env.PLAYFAB_TITLE_ID;
-const CHAIN_ID = 80001; // Mumbai
+const CHAIN_ID = 11155111; // Sepolia
 
 if (!OF_API_KEY || !PLAYFAB_SECRET_KEY || !PLAYFAB_TITLE_ID) {
     throw new Error("Required environment variables missing: Ensure OF_API_KEY, PLAYFAB_SECRET_KEY, and PLAYFAB_TITLE_ID are set.");
@@ -32,19 +32,27 @@ const httpTrigger: AzureFunction = async function (
         validateRequestBody(req);
         const masterPlayerAccountId = req.body.CallerEntityProfile.Lineage.MasterPlayerAccountId;
 
-        context.log("Creating player in Openfort...");
-        const OFplayer = await createOpenfortPlayer(masterPlayerAccountId);
+        // Check if Openfort data already exists
+        const { OFplayerId, OFaccountAddress } = await checkExistingOpenfortData(masterPlayerAccountId);
 
-        context.log(`Player with ID ${OFplayer.id} created. Proceeding to create account in Openfort...`);
-        const OFaccount = await createOpenfortAccount(OFplayer.id);
+        if (OFplayerId && OFaccountAddress) {
+            context.log("Openfort Player ID and Wallet Address already exist in PlayFab UserReadOnlyData.");
+            context.res = buildSuccessResponse(OFplayerId, OFaccountAddress);
+        } else {
+            context.log("Creating player in Openfort...");
+            const OFplayer = await createOpenfortPlayer(masterPlayerAccountId);
 
-        context.log(`Account with address ${OFaccount.address} created.`);
-        
-        // Adding data to PlayFab UserReadOnlyData
-        await addDataToPlayFab(masterPlayerAccountId, OFplayer.id, OFaccount.address);
+            context.log(`Player with ID ${OFplayer.id} created. Proceeding to create account in Openfort...`);
+            const OFaccount = await createOpenfortAccount(OFplayer.id);
 
-        context.res = buildSuccessResponse(OFplayer.id, OFaccount.address);
-        context.log("Function execution successful and response sent.");
+            context.log(`Account with address ${OFaccount.address} created.`);
+
+            // Adding data to PlayFab UserReadOnlyData
+            await addDataToPlayFab(masterPlayerAccountId, OFplayer.id, OFaccount.address);
+
+            context.res = buildSuccessResponse(OFplayer.id, OFaccount.address);
+            context.log("Function execution successful and response sent.");
+        }
     } catch (error) {
         context.log("An error occurred:", error);
         context.res = {
@@ -54,21 +62,19 @@ const httpTrigger: AzureFunction = async function (
     }
 };
 
-async function addDataToPlayFab(masterPlayerAccountId: string, OFplayerId: string, OFaccountAddress: string) {
-    const data = {
-        OpenfortPlayerId: OFplayerId,
-        PlayerWalletAddress: OFaccountAddress
-    };
-
+async function checkExistingOpenfortData(masterPlayerAccountId: string): Promise<{ OFplayerId?: string, OFaccountAddress?: string }> {
     return new Promise((resolve, reject) => {
-        PlayFabServer.UpdateUserReadOnlyData({
+        PlayFabServer.GetUserReadOnlyData({
             PlayFabId: masterPlayerAccountId,
-            Data: data,
+            Keys: ["OpenfortPlayerId", "PlayerWalletAddress"]
         }, (error, result) => {
             if (error) {
-                reject(new Error(`Failed to update PlayFab UserReadOnlyData: ${error.errorMessage}`));
+                reject(new Error(`Failed to retrieve UserReadOnlyData: ${error.errorMessage}`));
             } else {
-                resolve(result);
+                const data = result.data.Data;
+                const OFplayerId = data.OpenfortPlayerId?.Value;
+                const OFaccountAddress = data.PlayerWalletAddress?.Value;
+                resolve({ OFplayerId, OFaccountAddress });
             }
         });
     });
@@ -103,6 +109,26 @@ function buildSuccessResponse(OFplayerId: string, OFaccountAddress: string) {
             playerWalletAddress: OFaccountAddress
         })
     };
+}
+
+async function addDataToPlayFab(masterPlayerAccountId: string, OFplayerId: string, OFaccountAddress: string) {
+    const data = {
+        OpenfortPlayerId: OFplayerId,
+        PlayerWalletAddress: OFaccountAddress
+    };
+
+    return new Promise((resolve, reject) => {
+        PlayFabServer.UpdateUserReadOnlyData({
+            PlayFabId: masterPlayerAccountId,
+            Data: data,
+        }, (error, result) => {
+            if (error) {
+                reject(new Error(`Failed to update PlayFab UserReadOnlyData: ${error.errorMessage}`));
+            } else {
+                resolve(result);
+            }
+        });
+    });
 }
 
 export default httpTrigger;

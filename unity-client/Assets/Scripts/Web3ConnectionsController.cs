@@ -2,33 +2,46 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-//using Openfort.Model;
+using Openfort.Model;
 using PlayFab;
 using PlayFab.CloudScriptModels;
 using TMPro;
 using UnityEngine;
 
-public class ConnectUrl : MonoBehaviour
+public class Web3ConnectionsController : MonoBehaviour
 {
-    [Serializable]
-    private class Web3ActionResponseShort
-    {
-            
-    }
-    
+    [Header("UI")]
+    public GameObject view;
+    public GameObject createPanel;
+    public GameObject approvePanel;
     public TMP_InputField urlInput;
     public TextMeshProUGUI statusText;
 
     private string _connectionId;
+    private string _actionId;
 
+    public void Activate()
+    {
+        //TODO refresh and reject actions
+        
+        view.SetActive(true);
+    }
+    
     public void OnConnectBtnClickHandler()
     {
-        CreateWeb3Connection(OpenfortController.Instance.GetPlayerId(), 80001, urlInput.text);    
+        CreateWeb3Connection(OpenfortController.Instance.GetPlayerId(), 11155111, urlInput.text);    
+    }
+
+    public void OnApproveSellBtnClickHandler()
+    {
+        approvePanel.SetActive(false);
+        GetWeb3Action(_connectionId);
     }
 
     #region AZURE_FUNCTION_CALLS
     private void CreateWeb3Connection(string playerId, int chainId, string uri)
     {
+        createPanel.SetActive(false);
         statusText.text = "Creating Web3 Connection...";
 
         var request = new ExecuteFunctionRequest
@@ -86,56 +99,64 @@ public class ConnectUrl : MonoBehaviour
         Debug.Log(result.FunctionResult.ToString());
         _connectionId = result.FunctionResult.ToString();
 
-        StartCoroutine(WaitAndExecuteAction());
+        GetWeb3Action(_connectionId);
     }
     
     private void OnGetWeb3ActionSuccess(ExecuteFunctionResult result)
     {
-        var response = result.FunctionResult.ToString();
-        Debug.Log(response);
+        Debug.Log(result.FunctionResult.ToString());
+    
+        Web3ActionListResponse web3Actions = JsonConvert.DeserializeObject<Web3ActionListResponse>(result.FunctionResult.ToString());
         
-        /*
-        List<Web3ActionResponse> listResponses = JsonConvert.DeserializeObject<List<Web3ActionResponse>>(response);
-        
-        if (listResponses.Count == 0)
+        bool hasPendingActions = false;
+    
+        foreach (var web3Action in web3Actions.Data)
+        {
+            if (web3Action.Status == Web3ActionStatusEnum.Pending)
+            {
+                SubmitWeb3Action(_connectionId, web3Action.Id, true);
+                hasPendingActions = true;
+                break; // Exit the loop after finding the first pending action
+            }
+        }
+    
+        // If there are no pending actions, call GetWeb3Action
+        if (!hasPendingActions)
         {
             GetWeb3Action(_connectionId);
-            return;
         }
-
-        foreach (var web3Action in listResponses)
-        {
-            Debug.Log(web3Action.Id);
-        }
-        */
     }
     
-    private void OnSubmitWeb3ActionSuccess(ExecuteFunctionResult obj)
+    private void OnSubmitWeb3ActionSuccess(ExecuteFunctionResult result)
     {
-        throw new NotImplementedException();
+        Debug.Log(result.FunctionResult);
+        statusText.text = "Choose 'Accept & Sign' on the marketplace.";
+        
+        //TODO Add open panel with button to refresh actions and see if something's pending
+        approvePanel.SetActive(true);
+        // if something's pending let's approve it!
+        
+        // Then message to see marketplace
     }
     #endregion
     
     #region ERROR_CALLBACKS
     private void OnCreateWeb3ConnectionError(PlayFabError error)
     {
-        throw new System.NotImplementedException();
+        createPanel.SetActive(true);
+        Debug.Log(error.ErrorMessage);
     }
 
     private void OnGetWeb3ActionError(PlayFabError error)
     {
-        throw new System.NotImplementedException();
+        createPanel.SetActive(true);
+        Debug.LogError(error.ErrorMessage);
     }
     
-    private void OnSubmitWeb3ActionError(PlayFabError obj)
+    private void OnSubmitWeb3ActionError(PlayFabError error)
     {
-        throw new NotImplementedException();
+        createPanel.SetActive(true);
+        Debug.Log(error.ErrorMessage);
     }
     #endregion
-
-    IEnumerator WaitAndExecuteAction()
-    {
-        yield return new WaitForSeconds(1.5f);
-        GetWeb3Action(_connectionId);
-    }
 }
