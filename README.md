@@ -21,18 +21,11 @@ By integrating the [Openfort SDK](https://github.com/openfort-xyz/openfort-node)
 + Download or clone the [sample project](https://github.com/openfort-xyz/playfab-unity-sample): 
     + Open [unity-client](https://github.com/openfort-xyz/playfab-unity-sample/tree/main/unity-client) with Unity
     + Open [azure-backend](https://github.com/openfort-xyz/playfab-unity-sample/tree/main/azure-backend) with VS Code
-+ Watch the [video tutorial](https://www.youtube.com/watch?v=dbLpA2YB6vU) on configuring *Google Play Games for Unity* and apply it to [unity-client](https://github.com/openfort-xyz/playfab-unity-sample/tree/main/unity-client). Note that:
-    + You need a [Google Play Developer account](https://support.google.com/googleplay/android-developer/answer/6112435?hl=en)
-    + You need a [Google Cloud project](https://developers.google.com/workspace/guides/create-project)
-    + Google Play Games SDK is already imported to [unity-client](https://github.com/openfort-xyz/playfab-unity-sample/tree/main/unity-client)
-    + Skip the instructions related to ***Unity Gaming Services***
-    + We provide a [Keystore](https://github.com/openfort-xyz/playfab-unity-sample/tree/main/unity-client/Keystore) (password: `android`). You can use it instead of [creating a new one](https://youtu.be/dbLpA2YB6vU?t=273)
-    + Skip the step to [create this script](https://youtu.be/dbLpA2YB6vU?t=1089)
 
 ## Set up Openfort
 
 1. #### [Add a Contract](https://dashboard.openfort.xyz/assets/new)
-   This sample requires a contract to run. We use [0x38090d1636069c0ff1Af6bc1737Fb996B7f63AC0](https://mumbai.polygonscan.com/address/0x38090d1636069c0ff1Af6bc1737Fb996B7f63AC0) (NFT contract deployed in 80001 Mumbai). You can use this for the guide:
+   This sample requires a contract to run. We use [0x51216BFCf37A1D2002A9F3290fe5037C744a6438](https://sepolia.etherscan.io/address/0x51216bfcf37a1d2002a9f3290fe5037c744a6438) (NFT contract deployed in 11155111 Sepolia). You can use this for the guide:
 
    <img src="docs-img/image-1.png" width="500">
 
