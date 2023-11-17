@@ -153,15 +153,6 @@ To begin, open [unity-client](https://github.com/openfort-xyz/playfab-unity-samp
 
       <img src="docs-img/image-28.png" width="500">
 
-2. #### Configure Google Play Games SDK
-    - Even if you've set up the Google Play Games SDK following the [required tutorial](https://www.youtube.com/watch?v=dbLpA2YB6vU), ensure that you've correctly configured all fields by navigating to ***Window --> Google Play Games --> Setup --> Android setup***:
-
-      ![Google Play Games Config 1](docs-img/image-30.png)
-      
-      <img src="docs-img/image-31.png" width="500">
-
-    By doing this, when the game runs on Android, it will utilize Google Play Games for user authentication via PlayFab. Otherwise, the default PlayFab authentication will be used.
-
 ## Test in Editor
 
 Play ***Login*** scene, opt for ***Register***, provide an email and password, then click ***Register*** again. This scene should appear:
