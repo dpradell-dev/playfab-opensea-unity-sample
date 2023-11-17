@@ -41,11 +41,11 @@ By integrating the [Openfort SDK](https://github.com/openfort-xyz/openfort-node)
 ## Deploy Azure Backend
 Open [azure-backend](https://github.com/openfort-xyz/playfab-unity-sample/tree/main/azure-backend) with VS Code and sign in to Azure:
 
-![Azure backend image](docs-img/image-4.png)
+![Azure backend image](image-4.png)
 
 Ensure your Function App (here, it's "openfort-playfab") is listed:
 
-![Function App image](docs-img/image-5.png)
+![Function App image](image-5.png)
 
 In the terminal, run:
 ```
@@ -58,11 +58,11 @@ In the explorer, right-click on a function and select ***Deploy to Function App*
 
 Next, choose your Function App:
 
-![Select Function App](docs-img/image-7.png)
+![Select Function App](image-7.png)
 
 Then, click on ***Deploy***:
 
-![Deploy Confirmation](docs-img/image-8.png)
+![Deploy Confirmation](image-8.png)
 
 Navigate to your [Azure Portal](https://portal.azure.com/#home) and open your Function App. You should see all the functions listed:
 
@@ -70,7 +70,7 @@ Navigate to your [Azure Portal](https://portal.azure.com/#home) and open your Fu
 
 Click on any function and select ***Get Function Url***:
 
-![Get Function URL](docs-img/image-11.png)
+![Get Function URL](image-11.png)
 
 Subsequently, add this URL (along with all others) to PlayFab to enable access to our Azure Functions from within PlayFab.
 
@@ -83,7 +83,7 @@ Subsequently, add this URL (along with all others) to PlayFab to enable access t
 
     Our functions are already registered. To do the same, click ***Register function*** and provide the function name along with its URL:
 
-    <img src="docs-img/image-13.png" width="500">
+    <img src="image-13.png" width="500">
 
     Repeat this for all deployed functions.
 
@@ -95,7 +95,7 @@ Our Azure backend requires environment variables from both PlayFab and Openfort.
     - Navigate to the [Azure Portal](https://portal.azure.com/#home) and select your Function App.
     - Under ***Configuration***, click ***New application setting***:
       
-      <img src="docs-img/image-21.png" width="500">
+      <img src="image-21.png" width="500">
 
     - Provide the following details:
       + Name: `OF_API_KEY`
@@ -111,20 +111,20 @@ Our Azure backend requires environment variables from both PlayFab and Openfort.
 
     After adding these, your configuration panel should resemble the following. Click ***Save***:
     
-    <img src="docs-img/image-23.png" width="500">
+    <img src="image-23.png" width="500">
 
 2. #### Add PlayFab Environment Variables
     - Visit the [PlayFab developer dashboard](https://developer.playfab.com/), select your title, and navigate to ***Settings wheel --> Title settings***:
 
-      <img src="docs-img/image-24.png" width="500">
+      <img src="image-24.png" width="500">
 
     - In the ***API Features*** section, copy your ***Title ID***:
 
-      <img src="docs-img/image-29.png" width="500">
+      <img src="image-29.png" width="500">
 
     - Under ***Secret Keys***, note down your ***Secret key***:
 
-      ![Secret Key](docs-img/image-26.png)
+      ![Secret Key](image-26.png)
 
     - Return to the [Azure Portal](https://portal.azure.com/#home) and choose your Function App.
     - Under ***Configuration***, select ***New application setting*** and input:
@@ -137,7 +137,7 @@ Our Azure backend requires environment variables from both PlayFab and Openfort.
 
     Your configuration panel should now look like the following. Confirm your changes by clicking ***Save***:
 
-    <img src="docs-img/image-27.png" width="500">
+    <img src="image-27.png" width="500">
 
 ## Set up Unity Client
 
@@ -151,21 +151,21 @@ To begin, open [unity-client](https://github.com/openfort-xyz/playfab-unity-samp
     - Navigate to the ***Project*** tab.
     - Search for `PlayFabSharedSettings` and input your PlayFab ***Title ID***:
 
-      <img src="docs-img/image-28.png" width="500">
+      <img src="image-28.png" width="500">
 
 ## Test in Editor
 
 Play ***Login*** scene, opt for ***Register***, provide an email and password, then click ***Register*** again. This scene should appear:
 
-![Game Scene](docs-img/image-32.png)
+![Game Scene](image-32.png)
 
 Select ***Mint***. After a brief period, you should see a representation of your newly minted NFT:
 
-![Minted NFT](docs-img/image-33.png)
+![Minted NFT](image-33.png)
 
 In the [Openfort Players dashboard](https://dashboard.openfort.xyz/players), a new player entry should be visible. On selecting this player:
 
-![Player Entry](docs-img/image-34.png)
+![Player Entry](image-34.png)
 
 You'll notice that a `mint` transaction has been successfully processed:
 
