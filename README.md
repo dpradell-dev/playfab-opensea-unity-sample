@@ -79,7 +79,7 @@ Subsequently, add this URL (along with all others) to PlayFab to enable access t
 1. #### Register Azure Functions
     Visit the [PlayFab developer dashboard](https://developer.playfab.com/), choose your title, and click on ***Automation***:
 
-    ![Automation Selection](docs-img/image-12.png)
+    ![Alt text](image-5.png)
 
     Our functions are already registered. To do the same, click ***Register function*** and provide the function name along with its URL:
 
