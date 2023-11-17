@@ -177,10 +177,6 @@ Additionally, by choosing your **Mumbai Account** and viewing ***ERC-721 Token T
 
 ![Transaction Confirm 2](docs-img/image-37.png)
 
-## Test on Android
-
-Upon building and running the game on an Android device, the registration/login process is automated via Google Play Games, resulting in a streamlined user experience.
-
 ## Conclusion
 
 Upon completing the above steps, your Unity game will be fully integrated with Openfort and PlayFab. Always remember to test every feature before deploying to guarantee a flawless player experience.
