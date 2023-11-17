@@ -5,7 +5,7 @@
 
 By integrating the [Openfort SDK](https://github.com/openfort-xyz/openfort-node) into Azure Functions, we establish a seamless connection to PlayFab. Unity clients using the PlayFab Unity SDK can tap into these functions, accessing the full range of Openfort features within the game environment.
 
-In this sample we especially dig into [Web3 Connections API features](https://www.openfort.xyz/docs/reference/api/create-a-web3-connection-object), being able to connect with an NFT marketplace (like OpenSea) and list your NFTs from the game frictionlessly.
+In this sample we especially dig into [Web3 Connections API features](https://www.openfort.xyz/docs/reference/api/create-a-web3-connection-object), being able to connect with an NFT marketplace - like [OpenSea](https://opensea.io/) - and list your NFTs from the game frictionlessly.
 
 ## Application Workflow
 
