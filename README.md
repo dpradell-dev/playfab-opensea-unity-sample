@@ -9,7 +9,7 @@ In this sample we especially dig into [Web3 Connections API features](https://ww
 
 ## Application Workflow
 
-![Integration workflow](docs-img/openfort-playfab-integration-workflow.png)
+![Integration workflow](openfort-playfab-integration-workflow.png)
 
 ## Prerequisites
 + [Create a PlayFab account and title](https://learn.microsoft.com/en-us/gaming/playfab/gamemanager/quickstart)
