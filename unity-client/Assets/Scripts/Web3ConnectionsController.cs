@@ -130,9 +130,8 @@ public class Web3ConnectionsController : MonoBehaviour
     private void OnSubmitWeb3ActionSuccess(ExecuteFunctionResult result)
     {
         Debug.Log(result.FunctionResult);
-        statusText.text = "Choose 'Accept & Sign' on the marketplace.";
+        statusText.text = "";
         
-        //TODO Add open panel with button to refresh actions and see if something's pending
         approvePanel.SetActive(true);
     }
     #endregion
