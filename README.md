@@ -211,7 +211,7 @@ Back in Unity, select ***Approve***:
 
 ![Alt text](image-7.png)
 
-After a few seconds OpenSea will let you know the collection approval has been completed:
+After a few seconds OpenSea will let you know the collection approval has been successful:
 
 ![Alt text](image-9.png)
 
@@ -225,7 +225,7 @@ Finally, in OpenSea you will see the confirmation of your listing:
 
 ## Conclusion
 
-Upon completing the above steps, your Unity game will be fully integrated with Openfort and PlayFab. Always remember to test every feature before deploying to guarantee a flawless player experience.
+Upon completing the above steps, your Unity game will be fully integrated with Openfort and PlayFab, and able to list your NFTs to a marketplace directly from your game. Always remember to test every feature before deploying to guarantee a flawless player experience.
 
 For a deeper understanding of the underlying processes, check out the [tutorial video](https://youtu.be/PHNodBmbEfA). 
 
