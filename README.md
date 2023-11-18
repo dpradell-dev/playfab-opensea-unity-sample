@@ -213,6 +213,10 @@ After a few seconds OpenSea will let you know the transaction has been completed
 
 // If it's the firs time maybe again?
 
+Finally you will see your NFT listed for sale:
+
+![Alt text](image-10.png)
+
 ## Conclusion
 
 Upon completing the above steps, your Unity game will be fully integrated with Openfort and PlayFab. Always remember to test every feature before deploying to guarantee a flawless player experience.
