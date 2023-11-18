@@ -175,9 +175,9 @@ Additionally, by choosing your **Sepolia Account** and viewing ***NFT Transfers*
 
 ![Alt text](playfab-opensea-img-4.png)
 
-In Unity, click on ***List NFTs*** and the ***Web3 Connection*** panel will appear:
+In Unity, click on ***List NFTs***:
 
-![Alt text](image-1.png) //TODO correct image
+![Alt text](image-11.png)
 
 Go to [OpenSea](https://testnets.opensea.io/) and choose ***Login***:
 
@@ -203,19 +203,25 @@ Set a price and a duration and choose ***Complete listing***:
 
 ![Alt text](image-6.png)
 
+As your first NFT collection, you will need to approve it:
+
+![Alt text](image-12.png)
+
 Back in Unity, select ***Approve***:
 
 ![Alt text](image-7.png)
 
-After a few seconds OpenSea will let you know the transaction has been completed:
+After a few seconds OpenSea will let you know the collection approval has been completed:
 
 ![Alt text](image-9.png)
 
-// If it's the firs time maybe again?
+Now go back to Unity and approve the listing:
 
-Finally you will see your NFT listed for sale:
+![Alt text](image-7.png)
 
-![Alt text](image-10.png)
+Finally, in OpenSea you will see the confirmation of your listing:
+
+![Alt text](image-13.png)
 
 ## Conclusion
 
