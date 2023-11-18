@@ -191,9 +191,11 @@ Back to Unity, paste the URL and choose ***Create***:
 
 ![Alt text](image-4.png)
 
-//TODO Accept and sign part
+In OpenSea, a welcome panel will pop up. Choose ***Accept and sign***:
 
-In OpenSea go to your profile and you will find your NFT. Choose ***List for sale***:
+![Alt text](image-8.png)
+
+Go to your profile and you will find your NFT. Choose ***List for sale***:
 
 ![Alt text](image-5.png)
 
@@ -205,7 +207,11 @@ Back in Unity, select ***Approve***:
 
 ![Alt text](image-7.png)
 
-//TODO check why it's not working (out of gas)
+After a few seconds OpenSea will let you know the transaction has been completed:
+
+![Alt text](image-9.png)
+
+// If it's the firs time maybe again?
 
 ## Conclusion
 
