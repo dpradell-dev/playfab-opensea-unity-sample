@@ -209,15 +209,15 @@ As your first NFT collection, you will need to approve it:
 
 Back in Unity, select ***Approve***:
 
-![Alt text](image-7.png)
+![Alt text](image-14.png)
 
 After a few seconds OpenSea will let you know the collection approval has been successful:
 
 ![Alt text](image-9.png)
 
-Now go back to Unity and approve the listing:
+Now go back to Unity and ***Approve*** the listing:
 
-![Alt text](image-7.png)
+![Alt text](image-14.png)
 
 Finally, in OpenSea you will see the confirmation of your listing:
 
